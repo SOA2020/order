@@ -14,4 +14,6 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
     Order findById(int orderId);
 
     List<Order> findByUserId(Integer userId);
+
+    List<Order> findByUserIdAndSendStatus (Integer userId, Boolean sendStatus);
 }

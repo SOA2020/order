@@ -74,8 +74,12 @@ public class OrderController {
     @RequestMapping(value = "/order", method = RequestMethod.GET)
     public ResponseEntity getOrderList(@RequestParam int userId , @RequestParam(defaultValue = "1") int pageNumber, @RequestParam(required = false)Boolean sendStatus){
         ArrayList<OrderInfo> orderInfos = new ArrayList<>();
-        List<Order> orders = orderRepository.findByUserId(userId);
-
+        List<Order> orders;
+        if(sendStatus == null){
+             orders = orderRepository.findByUserId(userId);
+        }else{
+            orders = orderRepository.findByUserIdAndSendStatus(userId, sendStatus);
+        }
         int sz = orders.size();
         int pgStart = (pageNumber - 1) * PG_SIZE;
         int pgEnd = pageNumber * PG_SIZE;
