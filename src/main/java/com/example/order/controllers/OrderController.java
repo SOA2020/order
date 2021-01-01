@@ -58,7 +58,7 @@ public class OrderController {
         order = orderRepository.save(order);
         ArrayList<OrderCommodity> commodityList = new ArrayList<OrderCommodity>();
         for(HashMap<String, Object> com: commodity){
-            Boolean commentStatus = (Boolean) com.getOrDefault("commentStatus", null);
+            Boolean commentStatus = (Boolean) com.getOrDefault("commentStatus", false);
             Integer commodityId = (Integer) com.getOrDefault("commodityId", null);
             if(commentStatus == null || commodityId == null){
                 return new ResponseEntity<>("Bad Request", HttpStatus.BAD_REQUEST);
@@ -131,4 +131,5 @@ public class OrderController {
         orderRepository.save(order);
         return new ResponseEntity(HttpStatus.OK);
     }
+
 }
